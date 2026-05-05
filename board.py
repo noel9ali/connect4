@@ -6,17 +6,18 @@ class Board():
         self.cols = cols
         self.rows = rows
         self.arr = [[" "] * cols for _ in range(rows)]
+        self.turn = 0
     
     def add_piece(self, piece, col):
-        if col > self.cols or col < 1:
+        if col >= self.cols or col < 0:
             print(f"Invalid column. Please try again.")
             return self.BOUNDS_ERROR
-        if self.arr[self.rows - 1][col-1] != " ":
+        if self.arr[self.rows - 1][col] != " ":
             print(f"Column {col} is full, try another row.")
             return self.COL_FULL
         for row in range(self.rows):
-            if self.arr[row][col-1] == " ":
-                self.arr[row][col-1] = piece
+            if self.arr[row][col] == " ":
+                self.arr[row][col] = piece
                 return row
     
     def print(self):
@@ -46,3 +47,41 @@ class Board():
                     else:
                         return index
         return ""
+    
+    def get_legal_moves(self):
+        legal = []
+        for col in range(7):
+            if self.arr[5][col] == " ":
+                legal.append(col)
+        return legal
+
+    def copy(self):
+        b = Board()
+        b.rows = self.rows
+        b.cols = self.cols
+        b.turn = self.turn
+        for i in range(self.rows):
+            for j in range(self.cols):
+                b.arr[i][j] = self.arr[i][j]
+        return b    
+    
+# build_tree(board, depth) builds a tree of all possible legal moves with a given depth
+def build_tree(board, depth):
+    pieces = ("X", "O")
+    node = {
+    "board": board,
+    "children": []
+    }
+    # base case
+    if depth == 0:
+        return node
+    
+    # create subtree for each legal move recursively
+    legal_moves = board.get_legal_moves()
+    for i in legal_moves:
+        temp = board.copy()
+        temp.add_piece(pieces[temp.turn % 2], i)
+        temp.turn += 1
+        child_node = build_tree(temp, depth-1)
+        node["children"].append(child_node)
+    return node

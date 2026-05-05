@@ -3,13 +3,12 @@ from board import Board as b
 def main():
     pieces = ("X", "O")
     board = b()
-    turn = 0
 
     while(True):
-        player = turn % 2
+        player = board.turn % 2
         print(f"Your turn, Player {player+1} ({pieces[player]}).")
         try:
-            col = int(input(f"Choose a column to play in: "))
+            col = int(input(f"Choose a column to play in: ")) - 1
         except ValueError:
             print("Please enter an integer.")
             continue
@@ -31,7 +30,7 @@ def main():
             else: 
                 print("The board is full! The game ends in a tie :(")
                 break
-            turn += 1
+            board.turn += 1
 
 
 
