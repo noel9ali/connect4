@@ -1,0 +1,22 @@
+Connect 4 Bot
+
+A command-line Connect 4 game with perfect play.
+
+How it works:
+- Bitboard representation of game states
+- Negamax search w/ alpha-beta pruning and transposition table
+- Pascal Pons' precomputed early game opening book for O(1) lookup
+
+Requirements:
+Python 3.x
+
+File Structure
+main.py           - gameplay loop
+board.py          - board class, bitboard logic
+solver.py         - negamax solver
+opening_book.py   - opening book loader/query
+data/7x6.book - precomputed opening book
+
+Credit / References
+- Opening book by Pascal Pons
+(blog.gamesolver.org)

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: connect4
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && bash build.sh
+    startCommand: gunicorn api:app --bind 0.0.0.0:$PORT --workers 2
