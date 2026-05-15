@@ -6,7 +6,6 @@ c/
 frontend/node_modules/
 frontend/dist/
 manin.cfg
-data/opening_book.db
 data/*.db-journal
 .claude
 claude*

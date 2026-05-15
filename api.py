@@ -6,7 +6,6 @@ from board import Board
 from solver import best_move
 from opening_book import load_book, query_book
 import sqlite3
-import pickle
 import os
 import secrets
 
@@ -19,22 +18,15 @@ CORS(app)
 
 load_book("data/7x6.book")
 
-def _load_pkl_book():
-    # prefer the sqlite3 db; fall back to pkl for backwards compatibility
-    db = "data/opening_book.db"
-    pkl = "data/opening_book.pkl"
-    if os.path.exists(db):
-        conn = sqlite3.connect(db)
-        book = {(row[0], row[1]): row[2]
-                for row in conn.execute("SELECT player, mask, col FROM book")}
-        conn.close()
-        return book
-    if os.path.exists(pkl):
-        with open(pkl, "rb") as f:
-            return pickle.load(f)
-    return {}
+def _load_db_book():
+    db = os.path.join(BASE_DIR, "data", "opening_book.db")
+    conn = sqlite3.connect(db)
+    book = {(row[0], row[1]): row[2]
+            for row in conn.execute("SELECT player, mask, col FROM book")}
+    conn.close()
+    return book
 
-pkl_book = _load_pkl_book()
+pkl_book = _load_db_book()
 
 
 def _query_pkl_book(board):
