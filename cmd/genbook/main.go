@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"connect4/internal/c4"
+	"connect4/lib/c4"
 )
 
 type entry struct {

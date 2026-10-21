@@ -3,7 +3,7 @@
 //
 // The bot always plays a perfect game: early positions come from the opening
 // book in Supabase (itself generated from exact solves), everything else is
-// solved exactly by internal/c4. If the book is unreachable the solver is used
+// solved exactly by lib/c4. If the book is unreachable the solver is used
 // for every move, so strength never depends on the book being available.
 package handler
 
@@ -15,7 +15,7 @@ import (
 	"os"
 	"time"
 
-	"connect4/internal/c4"
+	"connect4/lib/c4"
 )
 
 const (
