@@ -1,0 +1,11 @@
+data/
+media/
+Final/
+Rendered/
+dev/
+visuals/
+__pycache__/
+frontend/node_modules/
+frontend/dist/
+*.py
+*.md

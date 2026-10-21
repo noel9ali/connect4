@@ -9,3 +9,5 @@ manin.cfg
 data/*.db-journal
 .claude
 claude*
+.env
+.vercel

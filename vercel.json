@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci --prefix frontend",
+  "buildCommand": "npm run build --prefix frontend",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    { "source": "/api/:route", "destination": "/api?route=:route" }
+  ],
+  "functions": {
+    "api/index.go": { "maxDuration": 30, "memory": 1024 }
+  }
+}
